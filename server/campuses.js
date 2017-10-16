@@ -9,7 +9,7 @@ api.get('/', (req,res,next) => {
 })
 
 api.get('/:CampusId', (req,res,next) => {
-    Campuses.findById(Number(req.param.CampusId))
+    Campuses.findById(Number(req.params.CampusId))
         .then(campus => res.json(campus))
         .catch(next)
 })
@@ -21,7 +21,7 @@ api.post('/', (req,res,next) => {
 })
 
 api.put('/:CampusId', (req,res,next) => {
-    Campuses.findById(Number(req.param.CampusId))
+    Campuses.findById(Number(req.params.CampusId))
         .then(campus => campus.update(req.body))
         .then(campus => res.json(campus))
         .catch(next)
