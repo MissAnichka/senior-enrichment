@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
-import AllCampuses from './AllCampuses';
+import { Link } from 'react-router-dom';
+// import AllCampuses from './AllCampuses';
+import StatefulSingleCampus from './StatefulSingleCampus';
 
 export default class StatefulAllCampuses extends Component{
     constructor(){
@@ -19,8 +20,26 @@ export default class StatefulAllCampuses extends Component{
 
     render(){
         const {campuses} = this.state
+        console.log("STATEFUL ALL CAMPUSES, list of campuses: ", campuses)
         return (
-            <AllCampuses campuses={campuses}/>
+            <div>
+                <h2>All Campuses</h2>
+                    <div className="row">
+                    {
+                    campuses.map(campus => {
+                        return (
+                            <div key={campus.id}>
+                                <div className="campusname">{campus.name}</div>
+                                <Link to={`/campuses/${campus.id}`}>
+                                    <img src={campus.image}/>
+                                </Link>
+                            </div>
+                    )})
+                    }
+                </div>
+            </div>
         )
     }
 }
+
+// <AllCampuses campuses={campuses}/>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
-import SingleStudent from './SingleStudent';
+// import SingleStudent from './SingleStudent';
 
 export default class StatefulSingleStudent extends Component{
     constructor(){
@@ -9,25 +9,40 @@ export default class StatefulSingleStudent extends Component{
         this.state = {
             student: {}
         };
+        this.getStudent = this.getStudent.bind(this);
+    }
+
+    getStudent(studentId){
+        axios.get(`./api/students/${studentId}`)
+        .then(res => res.data)
+        .then(student => this.setState({student}));
     }
 
     componentDidMount(){
         const studentId = this.props.match.params.studentId;
-        axios.get(`./api/student/${studentId}`)
-            .then(res => res.data)
-            .then(student => this.setState({student}));
+        this.getStudent(studentId)
     }
 
     componentWillReceiveProps(nextProps){
         const studentId = this.props.match.params.studentId;
         const nextstudentId = this.nextProps.match.params.studentId;
-        if(studentId === nextstudentId) return false;
+        if(studentId !== nextstudentId) this.getStudent(nextstudentId);
     }
 
     render(){
         const {student} = this.state
+        console.log("STATEFUL SINGLE STUDENT, PROPS: ", this.props)
         return (
-            <SingleStudent student={student}/>
+            <div>
+                <div className="singlestudent">
+                    <div key={student.id}>
+                        <div className="studentname">{student.name}</div>
+                        <img src={student.image}/>
+                    </div>
+                </div>
+            </div>
         )
     }
 }
+
+// <SingleStudent student={student}/>
