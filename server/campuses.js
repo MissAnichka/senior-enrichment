@@ -1,6 +1,6 @@
 'use strict'
 const api = require('express').Router()
-const {Campuses} = require('../db/models')
+const {Campuses, Students} = require('../db/models')
 
 api.get('/', (req,res,next) => {
     Campuses.findAll()
@@ -9,8 +9,10 @@ api.get('/', (req,res,next) => {
 })
 
 api.get('/:CampusId', (req,res,next) => {
-    Campuses.findById(Number(req.params.CampusId))
-        .then(campus => res.json(campus))
+    Campuses.findById(
+        Number(req.params.CampusId),
+        {include: Students})
+        .then(campusAndItsStudents => res.json(campusAndItsStudents))
         .catch(next)
 })
 

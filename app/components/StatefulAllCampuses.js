@@ -37,6 +37,11 @@ export default class StatefulAllCampuses extends Component{
                     )})
                     }
                 </div>
+                <div>
+                    <Link to={'/NewCampus'}>
+                        <div type="button" className="btn btn-primary">ADD A CAMPUS</div>
+                    </Link>
+                </div>
             </div>
         )
     }

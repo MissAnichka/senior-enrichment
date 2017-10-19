@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { Link, HashRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 // import SingleStudent from './SingleStudent';
 
@@ -40,6 +40,10 @@ export default class StatefulSingleStudent extends Component{
                         <img src={student.image}/>
                     </div>
                 </div>
+
+                <button type="submit" className="btn btn-success">Update Student</button>
+                <Update student={student}/>
+                <Delete student={student}/>
             </div>
         )
     }
