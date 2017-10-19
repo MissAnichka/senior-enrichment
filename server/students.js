@@ -35,7 +35,7 @@ api.put('/:StudentId', (req,res,next) => {
 api.delete('/:StudentId', (req,res,next) => {
     let id = Number(req.params.StudentId)
     Students.destroy({where: {id}})
-        .then(() => res.redirect("/api/students"))
+        .then(id => res.json(id))
         .catch(next)
 })
 

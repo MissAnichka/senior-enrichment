@@ -3,8 +3,8 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 const Home = () => {
     return (
-        <div>
-                <h1>Welcome to Staten Italy</h1>
+        <div className="">
+            <h1>Welcome to Staten Italy</h1>
         </div>
     )
 }

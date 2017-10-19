@@ -10,13 +10,26 @@ const AllStudents = (props) => {
         <div className="row">
             {
             students.map(student => {
-                return <div key={student.id}>
-                    <div className="studentname">{student.name}</div>
-                    <Link to={`/students/${student.id}`}>
-                        <img src={student.image}/>
-                    </Link>
-                    <div className="studentemail">{student.email}</div>
-                </div>
+                return (
+                    <div className="eachstudent" key={student.id}>
+                        <div className="studentname">
+                            <Link to={`/students/${student.id}`}>
+                                {student.name}
+                            </Link>    
+                        </div>
+                        <div className="studentimage">
+                            <Link to={`/students/${student.id}`}>
+                                <img src={student.image}/>
+                            </Link>
+                        </div>
+                        <div className="studentemail">
+                            {student.email}
+                        </div>
+                        <div className="studentcampusId">
+                            {student.campusId}
+                        </div>
+                    </div>
+                )
             })
             }
         </div>

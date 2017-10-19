@@ -52,8 +52,8 @@ export default class App extends Component{
                         <Route path="/campuses/:campusId" component={StatefulSingleCampus}/>
                         <Route exact path="/students" component={StatefulAllStudents}/>
                         <Route path="/students/:studentId" component={StatefulSingleStudent}/>
-                        <Route path="/NewStudent" render={() => <NewStudent addStudent={this.addStudent}/>}/>
-                        <Route path="/NewCampus" render={() => <NewCampus addCampus={this.addCampus}/>}/>
+                        <Route path="/NewStudent" component={NewStudent}/>
+                        <Route path="/NewCampus" component={NewCampus}/>
                     </Switch>
                     </div>
                 </Router>

@@ -13,6 +13,8 @@ export default class StatefulSingleCampus extends Component{
             students: []
         };
         this.getCampus = this.getCampus.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.handleDeleteButton = this.handleDeleteButton.bind(this);
     }
 
     getCampus(campusId){
@@ -24,9 +26,38 @@ export default class StatefulSingleCampus extends Component{
         });
     }
 
+    handleFormSubmit(evt){
+        evt.preventDefault();
+        const campusId = this.state.campus.id;
+        const name = evt.target.name.value;
+        const image = evt.target.image.value;
+        const updatedCampusInfo = {}
+        if(name) updatedStudentInfo.name = name;
+        if(image) updatedStudentInfo.image = image;
+        axios.put(`./api/campuses/${campusId}`, updatedCampusInfo)
+        .then(res => res.data)
+        .then(campus => this.setState({campus}))
+    }
+
+    handleDeleteButton(){
+        const campusId = this.state.campus.id;
+        axios.delete(`./api/campuses/${campusId}`)
+            .then(res => res.data)
+            // .then(campus => {
+            //     this.props.history.push('/campuses')
+            // })
+    }
+
     componentDidMount(){
+        console.log(this.props.history)
+        
         const campusId = this.props.match.params.campusId;
-        this.getCampus(campusId)
+        if(campusId){
+            this.getCampus(campusId)
+        } else {
+            this.props.history.push('/campuses')
+        }
+        
     }
 
     componentWillReceiveProps(nextProps){
@@ -40,11 +71,10 @@ export default class StatefulSingleCampus extends Component{
     render(){
         const {campus} = this.state
         const {students} = this.state
-        // const students = campus.getStudents();???
-        console.log("STATEFUL SINGLE CAMPUS, PROPS: ", this.props)
         return (
             <div>
                 <div className="singlecampus">
+                    <h1>CAMPUS</h1>
                     <div key={campus.id}>
                         <div className="campusname">{campus.name}</div>
                         <img src={campus.image}/>
@@ -53,8 +83,30 @@ export default class StatefulSingleCampus extends Component{
                 {
                     !!students.length ? <div><AllStudents students={students}/></div> : null
                 }
-                <Update student={student}/>
-                <Delete student={student}/>
+                <div className="UpdateAndDeleteForm">
+                    <h3>Update Campus Info</h3>
+                    <form onSubmit={this.handleFormSubmit}>
+                        <div className="form-group">
+                            <label className="form-control-label">Name</label>
+                            <input name="name" type="text" className="form-control" id="formGroupNewStudentName" placeholder="Student Name"/>
+                        </div>
+                        <div className="form-group">
+                            <label className="form-control-label">Email</label>
+                            <input name="email" type="email" className="form-control" id="formGroupNewStudentEmail" placeholder="Student Email"/>
+                        </div>
+                        <div className="form-group">
+                            <label className="form-control-label">Image URL</label>
+                            <input name="image" type="text" className="form-control" id="formGroupNewStudentImageURL" placeholder="Image URL"/>
+                        </div>
+                        <div className="UpdateButton">
+                            <button type="submit" className="btn btn-success">Update Campus</button>
+                        </div>
+                    </form>
+                    <div className="DeleteButton">
+                        <h4>Delete {campus.name}?</h4>
+                        <button onClick={this.handleDeleteButton} name="deleteButton" type="submit" className="btn btn-success">Delete Campus</button>
+                    </div>
+                </div>
             </div>
         )
     }

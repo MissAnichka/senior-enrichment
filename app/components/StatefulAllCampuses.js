@@ -28,11 +28,13 @@ export default class StatefulAllCampuses extends Component{
                     {
                     campuses.map(campus => {
                         return (
-                            <div key={campus.id}>
+                            <div className="eachcampus" key={campus.id}>
                                 <div className="campusname">{campus.name}</div>
-                                <Link to={`/campuses/${campus.id}`}>
-                                    <img src={campus.image}/>
-                                </Link>
+                                <div className="campusimage">
+                                    <Link to={`/campuses/${campus.id}`}>
+                                        <img src={campus.image}/>
+                                    </Link>
+                                </div>
                             </div>
                     )})
                     }
