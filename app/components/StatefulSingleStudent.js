@@ -66,23 +66,23 @@ export default class StatefulSingleStudent extends Component{
         return (
             <div>
                 <div className="singlestudent">
-                    <h1>STUDENT</h1>
+                    <h1 style={{color: 'white', font: 'center', margin: '1em'}}>STUDENT</h1>
                     <div className="eachstudent" key={student.id}>
-                        <div className="studentname">{student.name}</div>
-                        <div className="studentemail">{student.email}</div>
+                        <div style={{color: 'yellow', margin: '0.5em', fontSize: '1.6em'}} className="studentname">{student.name}</div>
+                        <div style={{color: 'yellow', margin: '0.5em', fontSize: '1.4em'}} className="studentemail">{student.email}</div>
                         <div className="studentimage"><img src={student.image}/></div>
-                        <div className="studentcampusId">{student.campusId}</div>
+                        <div style={{color: 'red', margin: '0.5em'}} className="studentcampusId">{student.campusId}</div>
                     </div>
                 </div>
                 <div className="singlecampus">
-                    <h2>CAMPUS</h2>
+                    <h2 style={{color: 'white', font: 'center', margin: '1em'}}>CAMPUS</h2>
                     <div key={campus.id}>
-                        <Link to={`/campuses/${campus.id}`}><div className="campusname">{campus.name}</div></Link>
-                        <Link to={`/campuses/${campus.id}`}><div className="campusimage"><img src={campus.image}/></div></Link>
+                        <Link to={`/campuses/${campus.id}`}><div style={{color: 'yellow', margin: '0.5em', fontSize: '1.6em'}} className="campusname">{campus.name}</div></Link>
+                        <Link to={`/campuses/${campus.id}`}><div style={{margin: '1em'}} className="campusimage"><img src={campus.image}/></div></Link>
                     </div>
                 </div>
                 <div className="UpdateAndDeleteForm">
-                    <h3>Update Student Info</h3>
+                    <h3 style={{margin: '1em'}}>Update Student Info</h3>
                     <form onSubmit={this.handleFormSubmit}>
                         <div className="form-group">
                             <label className="form-control-label">Name</label>
@@ -102,7 +102,7 @@ export default class StatefulSingleStudent extends Component{
                     </form>
                     <div className="DeleteButton">
                         <h4>Delete {student.name}?</h4>
-                        <button onClick={this.handleDeleteButton} name="deleteButton" type="submit" className="btn btn-success">Delete Student</button>
+                        <button onClick={this.handleDeleteButton} name="deleteButton" type="submit" className="btn btn-danger">Delete Student</button>
                     </div>
                 </div>
                

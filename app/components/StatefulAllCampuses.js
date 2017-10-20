@@ -20,19 +20,18 @@ export default class StatefulAllCampuses extends Component{
 
     render(){
         const {campuses} = this.state
-        console.log("STATEFUL ALL CAMPUSES, list of campuses: ", campuses)
         return (
-            <div>
-                <h2>All Campuses</h2>
-                    <div className="row">
+            <div className="container">
+                <h2 style={{color: 'white', font: 'center', margin: '1em'}}>All Campuses</h2>
+                    <div>
                     {
                     campuses.map(campus => {
                         return (
-                            <div className="eachcampus" key={campus.id}>
-                                <div className="campusname">{campus.name}</div>
-                                <div className="campusimage">
+                            <div className="mt-0 mb-1" key={campus.id}>
+                                <div style={{color: 'yellow', margin: '0.5em', fontSize: '1.6em'}} class="display-4">{campus.name}</div>
+                                <div>
                                     <Link to={`/campuses/${campus.id}`}>
-                                        <img src={campus.image}/>
+                                        <img className="mr-3" src={campus.image}/>
                                     </Link>
                                 </div>
                             </div>

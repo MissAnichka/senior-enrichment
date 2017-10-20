@@ -2,19 +2,20 @@ import React, {Component} from 'react';
 import { Link, HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 const AllStudents = (props) => {
-    console.log("ALLSTUDENTS PROPS: ", props)
     const {students} = props
     return (
-        <div>
-        <h2>All Students</h2>
+        <div className="container">
+        <h2 style={{color: 'white', font: 'center', margin: '1em'}}>All Students</h2>
         <div className="row">
             {
             students.map(student => {
                 return (
-                    <div className="eachstudent" key={student.id}>
+                    <div style={{margin: '0.5em'}} className="eachstudent" key={student.id}>
                         <div className="studentname">
                             <Link to={`/students/${student.id}`}>
-                                {student.name}
+                                <div style={{color: 'yellow', margin: '0.5em', fontSize: '1.6em'}} className="display-4">
+                                    {student.name}
+                                </div>
                             </Link>    
                         </div>
                         <div className="studentimage">
@@ -22,10 +23,10 @@ const AllStudents = (props) => {
                                 <img src={student.image}/>
                             </Link>
                         </div>
-                        <div className="studentemail">
+                        <div style={{color: 'yellow', margin: '0.5em', fontSize: '1.4em'}} className="studentemail">
                             {student.email}
                         </div>
-                        <div className="studentcampusId">
+                        <div style={{color: 'red', margin: '0.5em'}} className="studentcampusId">
                             {student.campusId}
                         </div>
                     </div>

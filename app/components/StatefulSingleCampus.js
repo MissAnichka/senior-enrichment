@@ -33,23 +33,23 @@ export default class StatefulSingleCampus extends Component {
         const name = evt.target.name.value;
         const image = evt.target.image.value;
         const updatedCampusInfo = {}
-        if (name) updatedStudentInfo.name = name;
-        if (image) updatedStudentInfo.image = image;
+        if (name) updatedCampusInfo.name = name;
+        if (image) updatedCampusInfo.image = image;
         axios.put(`./api/campuses/${campusId}`, updatedCampusInfo)
             .then(res => res.data)
             .then(campus => this.setState({ campus }))
-        
 
-        if(evt.target.choosestudent.value !== 'Choose a Student'){
+
+        if (evt.target.choosestudent.value !== 'Choose a Student') {
             let studentId = evt.target.choosestudent.value;
             console.log('Add A Student', studentId)
             axios.put(`/api/students/${studentId}`, { campusId })
-            .then(res => res.data)
+                .then(res => res.data)
             // .then(updatedStudent => {
             //     this.props.history.push(`/campuses/${campusId}`)
             // });
-        } else if(evt.target.removestudent.value !== 'Choose a Student') {
-            let campusId = null 
+        } else if (evt.target.removestudent.value !== 'Choose a Student') {
+            let campusId = null
             let studentId = evt.target.removestudent.value
             console.log('Remove A Student', studentId)
             axios.put(`/api/students/${studentId}`, { campusId })
@@ -58,20 +58,15 @@ export default class StatefulSingleCampus extends Component {
             //     // this.props.history.push(`/campuses/${campusId}`)
             // });
         }
-        // axios.put(`/api/students/${studentId}`, { campusId })
-        //     .then(res => res.data)
-        //     .then(updatedStudent => {
-        //         this.props.history.push(`/campuses/${campusId}`)
-        //     });
     }
 
     handleDeleteButton() {
         const campusId = this.state.campus.id;
         axios.delete(`./api/campuses/${campusId}`)
             .then(res => res.data)
-        // .then(campus => {
-        //     this.props.history.push('/campuses')
-        // })
+            .then(campus => {
+                this.props.history.push('/campuses')
+            })
     }
 
     componentDidMount() {
@@ -84,13 +79,13 @@ export default class StatefulSingleCampus extends Component {
             .then(allStudents => this.setState({ allStudents }));
     }
 
-    componentWillReceiveProps(nextProps) {
-        // if (this.nextProps.match.params.campusId) {
-        //     const campusId = this.props.match.params.campusId;
-        //     const nextcampusId = this.nextProps.match.params.campusId;
-        //     if (campusId !== nextcampusId) this.getCampus(nextcampusId);
-        // }
-    }
+    // componentWillReceiveProps(nextProps) {
+    // if (this.nextProps.match.params.campusId) {
+    //     const campusId = this.props.match.params.campusId;
+    //     const nextcampusId = this.nextProps.match.params.campusId;
+    //     if (campusId !== nextcampusId) this.getCampus(nextcampusId);
+    // }
+    // }
 
     render() {
         const { campus } = this.state
@@ -99,9 +94,9 @@ export default class StatefulSingleCampus extends Component {
         return (
             <div>
                 <div className="singlecampus">
-                    <h1>CAMPUS</h1>
+                    <h1 style={{ color: 'white', font: 'center', margin: '1em' }}>CAMPUS</h1>
                     <div key={campus.id}>
-                        <div className="campusname">{campus.name}</div>
+                        <div style={{ color: 'yellow', margin: '0.5em', fontSize: '1.6em' }} className="campusname">{campus.name}</div>
                         <img src={campus.image} />
                     </div>
                 </div>
@@ -109,7 +104,7 @@ export default class StatefulSingleCampus extends Component {
                     !!students.length ? <div><AllStudents students={students} /></div> : null
                 }
                 <div className="UpdateAndDeleteForm">
-                    <h3>Update Campus Info</h3>
+                    <h3 style={{ margin: '1em' }}>Update Campus Info</h3>
                     <form onSubmit={this.handleFormSubmit}>
                         <div className="form-group">
                             <label className="form-control-label">Name</label>
@@ -143,7 +138,7 @@ export default class StatefulSingleCampus extends Component {
                     </form>
                     <div className="DeleteButton">
                         <h4>Delete {campus.name}?</h4>
-                        <button onClick={this.handleDeleteButton} name="deleteButton" type="submit" className="btn btn-success">Delete Campus</button>
+                        <button onClick={this.handleDeleteButton} name="deleteButton" type="submit" className="btn btn-danger">Delete Campus</button>
                     </div>
                 </div>
             </div>

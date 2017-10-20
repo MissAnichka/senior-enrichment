@@ -19,7 +19,6 @@ export default class StatefulAllStudents extends Component{
 
     render(){
         const {students} = this.state
-        // console.log("STATEFUL ALL STUDENTS, list of STUDENTS: ", students)
         return (
             <AllStudents students={students}/>
         )
