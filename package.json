@@ -15,6 +15,7 @@
     "skeleton"
   ],
   "dependencies": {
+    "animate.css": "^3.5.2",
     "axios": "^0.16.2",
     "body-parser": "^1.18.2",
     "chalk": "^1.1.3",
