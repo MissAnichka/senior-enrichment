@@ -34,7 +34,7 @@ const AllStudents = (props) => {
             }
         </div>
         <Link to={'/NewStudent'}>
-            <div type="button" className="btn btn-primary">ADD A STUDENT</div>
+            <button type="button" className="btn btn-primary">ADD A STUDENT</button>
         </Link>
     </div>
     )

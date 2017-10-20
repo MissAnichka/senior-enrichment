@@ -38,15 +38,31 @@ export default class StatefulSingleCampus extends Component {
         axios.put(`./api/campuses/${campusId}`, updatedCampusInfo)
             .then(res => res.data)
             .then(campus => this.setState({ campus }))
+        
 
-        const studentId = evt.target.choosestudent.value;
-        console.log(evt.target.deletestudent)
-        if (evt.target.deletestudent) {const campusId = null};
-        axios.put(`/api/students/${studentId}`, { campusId })
+        if(evt.target.choosestudent.value !== 'Choose a Student'){
+            let studentId = evt.target.choosestudent.value;
+            console.log('Add A Student', studentId)
+            axios.put(`/api/students/${studentId}`, { campusId })
             .then(res => res.data)
-            .then(updatedStudent => {
-                this.props.history.push(`/campuses/${campusId}`)
-            });
+            // .then(updatedStudent => {
+            //     this.props.history.push(`/campuses/${campusId}`)
+            // });
+        } else if(evt.target.removestudent.value !== 'Choose a Student') {
+            let campusId = null 
+            let studentId = evt.target.removestudent.value
+            console.log('Remove A Student', studentId)
+            axios.put(`/api/students/${studentId}`, { campusId })
+                .then(res => res.data)
+            // .then(updatedStudent => {
+            //     // this.props.history.push(`/campuses/${campusId}`)
+            // });
+        }
+        // axios.put(`/api/students/${studentId}`, { campusId })
+        //     .then(res => res.data)
+        //     .then(updatedStudent => {
+        //         this.props.history.push(`/campuses/${campusId}`)
+        //     });
     }
 
     handleDeleteButton() {
@@ -69,11 +85,11 @@ export default class StatefulSingleCampus extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.nextProps.match.params.campusId) {
-            const campusId = this.props.match.params.campusId;
-            const nextcampusId = this.nextProps.match.params.campusId;
-            if (campusId !== nextcampusId) this.getCampus(nextcampusId);
-        }
+        // if (this.nextProps.match.params.campusId) {
+        //     const campusId = this.props.match.params.campusId;
+        //     const nextcampusId = this.nextProps.match.params.campusId;
+        //     if (campusId !== nextcampusId) this.getCampus(nextcampusId);
+        // }
     }
 
     render() {

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
@@ -17,8 +17,8 @@ import StatefulSingleCampus from './StatefulSingleCampus';
 import NewCampus from './NewCampus';
 import NewStudent from './NewStudent';
 
-export default class App extends Component{
-    constructor(){
+export default class App extends Component {
+    constructor() {
         super();
         this.state = {
             newstudent: {},
@@ -28,33 +28,35 @@ export default class App extends Component{
         this.addCampus = this.addCampus.bind(this);
     }
 
-    addStudent(info){
-        axios.post('./api/students', {info})
+    addStudent(info) {
+        axios.post('./api/students', { info })
             .then(res => res.data)
-            .then(newstudent => {this.setState({newstudent})});
+            .then(newstudent => { this.setState({ newstudent }) });
     }
 
-    addCampus(info){
-        axios.post('./api/campuses', {info})
+    addCampus(info) {
+        axios.post('./api/campuses', { info })
             .then(res => res.data)
-            .then(newcampus => {this.setState({newcampus})});
+            .then(newcampus => { this.setState({ newcampus }) });
     }
 
-    render(){
+    render() {
         return (
-            <div style={ {backgroundImage: "url('https://dg19s6hp6ufoh.cloudfront.net/pictures/613093294/large/The_Best_HD_HQ_Hi-Res_Wallpapers_Collection_-_Fantasy_Art_by_tonyx__1300_pictures-319.jpg_Gladius_0359_Christian_Riese_Lassen_Eternity.jpeg?1474582032'", height: '100vh', backgroundSize: 'cover'} }>
+            <div style={{ backgroundImage: "url('https://dg19s6hp6ufoh.cloudfront.net/pictures/613093294/large/The_Best_HD_HQ_Hi-Res_Wallpapers_Collection_-_Fantasy_Art_by_tonyx__1300_pictures-319.jpg_Gladius_0359_Christian_Riese_Lassen_Eternity.jpeg?1474582032'", height: '100vh', backgroundSize: 'cover' }}>
                 <Router>
                     <div>
-                    <Navbar />
-                    <Switch>
-                        <Route exact path="/" component={Home}/>
-                        <Route exact path="/campuses" component={StatefulAllCampuses}/>
-                        <Route path="/campuses/:campusId" component={StatefulSingleCampus}/>
-                        <Route exact path="/students" component={StatefulAllStudents}/>
-                        <Route path="/students/:studentId" component={StatefulSingleStudent}/>
-                        <Route path="/NewStudent" component={NewStudent}/>
-                        <Route path="/NewCampus" component={NewCampus}/>
-                    </Switch>
+                        <Navbar />
+                        <div className='container'>
+                            <Switch>
+                                <Route exact path="/" component={Home} />
+                                <Route exact path="/campuses" component={StatefulAllCampuses} />
+                                <Route path="/campuses/:campusId" component={StatefulSingleCampus} />
+                                <Route exact path="/students" component={StatefulAllStudents} />
+                                <Route path="/students/:studentId" component={StatefulSingleStudent} />
+                                <Route path="/NewStudent" component={NewStudent} />
+                                <Route path="/NewCampus" component={NewCampus} />
+                            </Switch>
+                        </div>
                     </div>
                 </Router>
             </div>
